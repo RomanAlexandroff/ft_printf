@@ -4,7 +4,7 @@ SRCS =	ft_printf.c ft_printf_hex_ptr.c\
 		
 OBJS = ${SRCS:.c=.o}
 TESTER = tester_for_ft_printf.c
-COMMIT_MSG ?= "Auto-commit from Makefile"
+COMMIT_MSG ?= Auto-commit from Makefile
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

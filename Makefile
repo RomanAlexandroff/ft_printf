@@ -1,5 +1,5 @@
-SRCS =	ft_printf.c ft_printf_hex_ptr.c\
-		ft_printf_char_str.c ft_printf_ints.c \
+SRCS =	ft_printf.c put_hex_ptr.c\
+		put_char_str.c put_ints.c \
 		utilities.c
 		
 OBJS = ${SRCS:.c=.o}
@@ -16,7 +16,7 @@ RM = rm -f
 
 ${NAME}: ${OBJS}
 	@${AR} ${NAME} ${OBJS}
-	@echo "Make: Library file and Object files have been built"
+	@echo "Make: Library file and the Objects have been built"
 
 all: ${NAME}
 

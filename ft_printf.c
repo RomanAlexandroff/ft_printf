@@ -21,9 +21,9 @@ static int	dispatcher(va_list *vl, const char format)
 	else if (format == 'p')
 		char_printed = ft_putptr((uintptr_t)va_arg(*vl, void *), format);
 	else if (format == 'd' || format == 'i')
-    	char_printed = ft_putint(va_arg(*vl, int));
+    	char_printed = put_number((long)va_arg(*vl, int));
 	else if (format == 'u')
-		char_printed = ft_putunsigned(va_arg(*vl, unsigned int));
+		char_printed = put_number((long)va_arg(*vl, unsigned int));
 	else if (format == 'x' || format == 'X')
 		char_printed = ft_puthex(va_arg(*vl, unsigned int), format);
 	else if (format == '%')

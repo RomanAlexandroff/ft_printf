@@ -1,10 +1,11 @@
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# include <stdint.h>
+//# include <stdint.h>
 
 # define DEC_BASE	10
 # define HEX_BASE	16
@@ -14,8 +15,7 @@
 
 int			ft_putchar(int c);
 int			ft_putstr(char *str);
-int			ft_putint(int num);
-int			ft_putunsigned(unsigned int num);
+int			put_number(long num);
 int			ft_puthex(unsigned int num, const char format);
 int			ft_putptr(uintptr_t ptr, const char format);
 int			ft_printf(const char *format, ...);
@@ -27,19 +27,18 @@ char		*ft_ltoa(long num);
 
 
 /*			TO-DO LIST
-
-	- add heads to all the files
-	- check how ft_printf should handle malloc fails
-	- run Norminette with all the flags and fix whatever it says
-		(ignore the main_tests.c file)
-	- check if it compiles
+	- check if it compiles 
 	- check if it compiles without the <stdint.h> library for uinptr_t type
 		and if it does compile, remove the <stdint.h> library
 	- check if real printf says 0x0 or (nil) when trying to print NULL pointer
-		because macOS printf prints 0x0, but Debian printf prints (nil)
+		because macOS printf prints 0x0, but Debian printf prints (nil), and
+		then change it accordingly in ft_printf_hex_ptr.c / ft_putptr()
 	- check that the program prints INT_MIN as -2147483648
-	- remove the main-tests.c file
-	- remove any files that are not part of the task
-	- check that Makefile works
+	- check that Makefile works (all the rules exept "git")
 	- check that Makefile compiles the library with correct name
+	- make sure the subject does not have any changes, that I have not implemented
+	- add heads to all the files
+	- move the tester_for_ft_printf.c file into some other folder before submition,
+		because this file does not comply with the Norm and will cause Moulinette to fail you !
+	- run Norminette (make norm) with all the flags and fix whatever it says
 */

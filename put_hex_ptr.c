@@ -17,7 +17,8 @@ int	ft_putptr(uintptr_t ptr, const char format)
 	int	err_check;
 
 	if (!ptr)
-		return (ft_putstr("(nil)"));
+		return (write(FD, "(nil)", 5));		// Linux
+//		return (write(FD, "0x0", 3));		// macOS	
 	err_check = write(FD, "0x", 2);
 	if (err_check < 0)
 		return (err_check);

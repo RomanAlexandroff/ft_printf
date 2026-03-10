@@ -1,2 +1,8 @@
 .DS_Store
 *.pdf
+*.txt
+*.o
+*.a
+*.out
+*.exe
+test

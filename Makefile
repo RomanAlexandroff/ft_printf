@@ -13,7 +13,7 @@ TESTER = tester_for_ft_printf.c
 COMMIT_MSG ?= Auto-commit from Makefile
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
@@ -33,11 +33,26 @@ test:
 	@echo "\n\n=========== TEST ENDS HERE ===========\n\n"
 	@$(RM) temp_test_roaleksa
 
+gdb:
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o temp_test_roaleksa
+	@gdb ./temp_test_roaleksa
+	@$(RM) temp_test_roaleksa
+
+lldb:
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o temp_test_roaleksa
+	@lldb ./temp_test_roaleksa
+	@$(RM) temp_test_roaleksa
+	@$(RM) -r temp_test_roaleksa.dSYM
+
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
-		echo "Changes detected. Committing..."; \
+		read -p "Commit message: " msg; \
+		if [ -z "$$msg" ]; then \
+			msg="$(COMMIT_MSG)"; \
+		fi; \
+		echo "Committing with message: $$msg"; \
 		git add .; \
-		git commit -m "$(COMMIT_MSG)"; \
+		git commit -m "$$msg"; \
 		git push; \
 	else \
 		echo "No changes detected."; \
@@ -53,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all norm test git clean fclean re
+.PHONY: all norm test gdb lldb git clean fclean re

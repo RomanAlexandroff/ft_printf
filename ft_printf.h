@@ -25,7 +25,6 @@ char		*ft_ltoa(long num);
 
 #endif
 
-
 /*			TO-DO LIST
 	- check if it compiles 
 	- check if it compiles without the <stdint.h> library for uinptr_t type

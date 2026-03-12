@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-SRCS =	ft_printf.c put_hex_ptr.c\
+SRCS =	ft_printf.c put_hex_ptr.c \
 		put_char_str.c put_ints.c \
 		utilities.c
 		

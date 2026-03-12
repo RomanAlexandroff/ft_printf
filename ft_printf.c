@@ -21,7 +21,7 @@ static int	dispatcher(va_list *vl, const char format)
 	else if (format == 'p')
 		char_printed = ft_putptr((uintptr_t)va_arg(*vl, void *), format);
 	else if (format == 'd' || format == 'i')
-    	char_printed = put_number((long)va_arg(*vl, int));
+		char_printed = put_number((long)va_arg(*vl, int));
 	else if (format == 'u')
 		char_printed = put_number((long)va_arg(*vl, unsigned int));
 	else if (format == 'x' || format == 'X')
@@ -38,7 +38,7 @@ int	ft_printf(const char *string, ...)
 	int		i;
 	va_list	vl;
 	int		char_printed;
-	int 	err_check;
+	int		err_check;
 
 	i = 0;
 	char_printed = 0;
@@ -59,5 +59,3 @@ int	ft_printf(const char *string, ...)
 	}
 	return (va_end(vl), char_printed);
 }
-
-//Tell me more about the comma operator. I've just discovered it and I don't believe I have ever used it consciously 

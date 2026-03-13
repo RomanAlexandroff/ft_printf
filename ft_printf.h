@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026-03-13 13:23:17 by roaleksa          #+#    #+#             */
+/*   Updated: 2026-03-13 13:23:17 by roaleksa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -36,8 +47,8 @@ char		*ft_ltoa(long num);
 	- check that Makefile works (all the rules exept "git")
 	- check that Makefile compiles the library with correct name
 	- make sure the subject does not have any changes, that I have not implemented
-	- add heads to all the files
 	- move the tester_for_ft_printf.c file into some other folder before submition,
 		because this file does not comply with the Norm and will cause Moulinette to fail you !
-	- run Norminette (make norm) with all the flags and fix whatever it says
+	- run Norminette (make norm) with all the flags and fix whatever it says,
+		ignore tester_for_ft_printf.c, just do not include it into the submition folder.
 */

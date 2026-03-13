@@ -10,7 +10,18 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 TESTER = tester_for_ft_printf.c
+TEMP = temp_test_roaleksa
 COMMIT_MSG ?= Auto-commit from Makefile
+
+# Detect the Operating System
+UNAME := $(shell uname -s)
+ifeq ($(UNAME),Darwin)
+	DEBUGGER := lldb
+	DSYM_CLEAN := $(RM) -r $(TEMP).dSYM
+else
+	DEBUGGER := gdb
+	DSYM_CLEAN :=
+endif
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -27,22 +38,19 @@ norm:
 	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
 test:
-	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -o temp_test_roaleksa
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -o $(TEMP)
 	@echo "\n\n========== FT_PRINTF TESTER ==========\n\n"
-	@./temp_test_roaleksa
+	@./$(TEMP)
 	@echo "\n\n=========== TEST ENDS HERE ===========\n\n"
-	@$(RM) temp_test_roaleksa
+	@$(RM) $(TEMP)
 
+#calls GDB or LLDB depending on the detected Operating System
 gdb:
-	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o temp_test_roaleksa
-	@gdb ./temp_test_roaleksa
-	@$(RM) temp_test_roaleksa
-
-lldb:
-	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o temp_test_roaleksa
-	@lldb ./temp_test_roaleksa
-	@$(RM) temp_test_roaleksa
-	@$(RM) -r temp_test_roaleksa.dSYM
+	@echo "Using debugger: $(DEBUGGER)"
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o $(TEMP)
+	@$(DEBUGGER) ./$(TEMP)
+	@$(RM) $(TEMP)
+	@$(DSYM_CLEAN)
 
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
@@ -68,4 +76,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all norm test gdb lldb git clean fclean re
+.PHONY: all norm test gdb git clean fclean re

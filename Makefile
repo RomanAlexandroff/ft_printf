@@ -1,3 +1,4 @@
+
 NAME = libftprintf.a
 
 SRCS =	ft_printf.c put_hex_ptr.c \
@@ -15,13 +16,6 @@ COMMIT_MSG ?= Auto-commit from Makefile
 
 # Detect the Operating System
 UNAME := $(shell uname -s)
-ifeq ($(UNAME),Darwin)
-	DEBUGGER := lldb
-	DSYM_CLEAN := $(RM) -r $(TEMP).dSYM
-else
-	DEBUGGER := gdb
-	DSYM_CLEAN :=
-endif
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -44,13 +38,36 @@ test:
 	@echo "\n\n=========== TEST ENDS HERE ===========\n\n"
 	@$(RM) $(TEMP)
 
-#calls GDB or LLDB depending on the detected Operating System
-gdb:
-	@echo "Using debugger: $(DEBUGGER)"
-	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o $(TEMP)
-	@$(DEBUGGER) ./$(TEMP)
+#this rule calls Valgrind or Leaks depending on the OS
+valgrind:
+ifeq ($(UNAME),Darwin)
+	@echo "Using Leaks for memory checking."
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -o $(TEMP)
+	@leaks --atExit -- ./$(TEMP)
 	@$(RM) $(TEMP)
-	@$(DSYM_CLEAN)
+	@$(RM) -r $(TEMP).dSYM
+else
+	@echo "Using Valgrind for memory checking."
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -o $(TEMP)
+	@valgrind --leak-check=full --show-leak-kinds=all \
+		--track-origins=yes --track-fds=yes --verbose ./$(TEMP)
+	@$(RM) $(TEMP)
+endif
+
+#calls GDB or LLDB depending on the detected OS
+gdb:
+ifeq ($(UNAME),Darwin)
+	@echo "Using LLDB."
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o $(TEMP)
+	@lldb ./$(TEMP)
+	@$(RM) $(TEMP)
+	@$(RM) -r $(TEMP).dSYM
+else
+	@echo "Using GDB."
+	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o $(TEMP)
+	@gdb ./$(TEMP)
+	@$(RM) $(TEMP)
+endif
 
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
@@ -76,4 +93,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all norm test gdb git clean fclean re
+.PHONY: all norm test valgrind gdb git clean fclean re

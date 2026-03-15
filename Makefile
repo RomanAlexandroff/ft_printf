@@ -65,7 +65,7 @@ ifeq ($(UNAME),Darwin)
 else
 	@echo "Using GDB."
 	@$(CC) $(CFLAGS) $(TESTER) $(SRCS) -g -o $(TEMP)
-	@gdb ./$(TEMP)
+	@gdb -iex "set auto-load safe-path $(CURDIR)" ./$(TEMP)
 	@$(RM) $(TEMP)
 endif
 

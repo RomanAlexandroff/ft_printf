@@ -6,3 +6,4 @@
 *.out
 *.exe
 test
+.gdb_history

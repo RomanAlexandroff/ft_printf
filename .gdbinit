@@ -18,7 +18,7 @@ define wideview
     set listsize 5
     set $wideview = 1
 end
-# make this call inside GDB to activate the script:
+# make this call inside GDB to deactivate the script:
 define nowideview
     set $wideview = 0
 end

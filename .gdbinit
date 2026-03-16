@@ -13,9 +13,19 @@ set print address on
 set history save on
 
 # SCRIPT: MAKE GDB SHOW 5 LINES OF CODE PER STEP like LLDB
-set listsize 5
+# make this call inside GDB to activate the script:
+define wideview
+    set listsize 5
+    set $wideview = 1
+end
+# make this call inside GDB to activate the script:
+define nowideview
+    set $wideview = 0
+end
+
 define hook-stop
-python
+    if $wideview
+        python
 import gdb
 f = gdb.selected_frame()
 sal = f.find_sal()
@@ -29,6 +39,7 @@ for line in lines.splitlines():
         print(">" + line)
     else:
         print(" " + line)
+end
 end
 end
 # END OF THE SCRIPT =======================================

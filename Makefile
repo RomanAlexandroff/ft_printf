@@ -71,7 +71,11 @@ endif
 
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
-		read -p "Commit message: " msg; \
+		echo "The following changes will be added + commited + pushed"; \
+		echo "(M = modified, ? = untracked, D = deleted, ! = ignored):\n"; \
+		git status --porcelain; \
+		echo ""; \
+		read -p "Commit message (press \"Enter\" to send default or \"Ctrl+C\" to cancel): " msg; \
 		if [ -z "$$msg" ]; then \
 			msg="$(COMMIT_MSG)"; \
 		fi; \

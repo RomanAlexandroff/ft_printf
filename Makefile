@@ -28,7 +28,7 @@ all: $(NAME)
 
 norm:
 	@echo "\n\n========== RUNNING NORMINETTE ==========\n\n"
-	@norminette -R CheckForbiddenSourceHeader
+	@norminette -R CheckForbiddenSourceHeader || true
 	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
 test:

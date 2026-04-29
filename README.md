@@ -1,4 +1,4 @@
-# FT_PRINTF
+# ft_printf
 
 *This project has been created as part of the 42 curriculum by roaleksa.*
 
@@ -145,7 +145,7 @@ make
 | `make re` | Performs `fclean` followed by `all` (full rebuild) | `libftprintf.a` |
 | `make norm` | Runs Norminette to check code style compliance | Norminette report |
 | `make test` | Compiles and runs the test suite | Test output |
-| `make valgrind` or `make leaks` | Runs memory leak detection (uses Valgrind on Linux, Leaks on macOS) | Memory report |
+| `make valgrind` | Runs memory leak detection (uses Valgrind on Linux, Leaks on macOS) | Memory report |
 | `make gdb` | Launches the debugger (LLDB on macOS, GDB on Linux) | Debugger session |
 | `make git` | Interactively commits and pushes changes | Git output |
 
@@ -297,7 +297,6 @@ ft_printf/
 - **put_char_str.c**: Output routines for individual characters and strings
 - **put_ints.c**: Output routine for numeric values (combines signed and unsigned integers)
 - **utilities.c**: General-purpose helper functions for number conversions and length calculations
-- **tester_for_ft_printf.c**: Comprehensive test suite (note: excluded from 42 Moulinette submission)
 
 ---
 

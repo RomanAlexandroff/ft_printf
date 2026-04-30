@@ -2,7 +2,7 @@
 
 # ft_printf
 
----
+<br>
 
 ## Table of Contents
 
@@ -14,8 +14,6 @@
 - [Supported Format Specifiers](#supported-format-specifiers)
 - [Resources](#resources)
 - [AI Usage Disclosure](#ai-usage-disclosure)
-
----
 
 <br>
 
